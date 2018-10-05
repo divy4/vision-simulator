@@ -19,6 +19,11 @@ def __floatImgToInt(image):
     return image.astype(int)
 
 
+def getArraySliceAt(array, start, shape):
+    end = numpy.asarray(start) + numpy.asarray(shape)
+    return array[start[0]:end[0], start[1]:end[1]]
+
+
 def getBrightnessMap(image):
     if len(image.shape) < 3: # black & white
         return image
