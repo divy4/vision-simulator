@@ -7,7 +7,7 @@ def __removeAlpha(image):
 
 
 def __intImgToFloat(image):
-    image /= 255.
+    image = image / 255.
     image = numpy.maximum(0., image)
     return numpy.minimum(1., image)
 
