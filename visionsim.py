@@ -33,13 +33,19 @@ def main():
         nargs='+',
         help='Images to apply your vision to.')
     parser.add_argument(
+        '-n', '--norm-factor',
+        default=1.7,
+        type=float,
+        help='The exponent factor used in normalizing pixel_map. You may have to adjust this value for good results.'
+    )
+    parser.add_argument(
         '-v', '--verbose',
         action='store_true',
         help='Run in verbose mode.')
     args = parser.parse_args()
 
     visionImg = util.readImage(args.pixel_map)
-    visionMap = util.getBrightnessMap(visionImg)
+    visionMap = util.getBrightnessMap(visionImg, args.norm_factor)
     for path in args.images:
         image = util.readImage(path, convertToFloat=True)
         image = applyVision(visionMap, image, verbose=args.verbose)

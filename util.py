@@ -24,12 +24,13 @@ def getArraySliceAt(array, start, shape):
     return array[start[0]:end[0], start[1]:end[1]]
 
 
-def getBrightnessMap(image):
+def getBrightnessMap(image, factor=1.7):
     if len(image.shape) < 3: # black & white
         return image
     brightness = numpy.zeros(image.shape[:-1])
     for index in numpy.ndindex(image.shape[:-1]):
         brightness[index] = numpy.average(image[index])
+    brightness = brightness ** factor
     return brightness / numpy.sum(brightness)
 
 
