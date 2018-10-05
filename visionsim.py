@@ -12,8 +12,9 @@ def applyVision(visionMap, image, verbose=False):
                           dtype=int)
     applied = numpy.zeros(shape)
     for index, brightnessFactor in numpy.ndenumerate(visionMap):
-        imageSlice = util.getArraySliceAt(image, index, applied.shape[:-1])
-        applied += brightnessFactor * imageSlice
+        if not brightnessFactor == 0:
+            imageSlice = util.getArraySliceAt(image, index, applied.shape[:-1])
+            applied += brightnessFactor * imageSlice
         if verbose and index[1] + 1 == visionMap.shape[1]:
             percent = (index[0] * visionMap.shape[1] + index[1] + 1) \
                     * 100 / (visionMap.shape[0] * visionMap.shape[1])
