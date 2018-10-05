@@ -5,6 +5,7 @@ import util
 
 
 def applyVision(visionMap, image, verbose=False):
+    visionMap = numpy.flip(visionMap)
     shape = numpy.asarray([image.shape[0] - visionMap.shape[0], \
                            image.shape[1] - visionMap.shape[1], \
                            image.shape[2]],
