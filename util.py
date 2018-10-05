@@ -19,6 +19,10 @@ def __floatImgToInt(image):
     return image.astype(int)
 
 
+def getBrightnessMap(image):
+    pass
+
+
 def readImage(path, convertToFloat=False):
     image = imageio.imread(path)
     image = numpy.asarray(image, dtype=int)
