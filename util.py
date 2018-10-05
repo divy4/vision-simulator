@@ -7,7 +7,7 @@ def __removeAlpha(image):
 
 
 def __intImgToFloat(image):
-    image /= 255.
+    image = image / 255.
     image = numpy.maximum(0., image)
     return numpy.minimum(1., image)
 
@@ -19,8 +19,18 @@ def __floatImgToInt(image):
     return image.astype(int)
 
 
+def getArraySliceAt(array, start, shape):
+    end = numpy.asarray(start) + numpy.asarray(shape)
+    return array[start[0]:end[0], start[1]:end[1]]
+
+
 def getBrightnessMap(image):
-    pass
+    if len(image.shape) < 3: # black & white
+        return image
+    brightness = numpy.zeros(image.shape[:-1])
+    for index in numpy.ndindex(image.shape[:-1]):
+        brightness[index] = numpy.average(image[index])
+    return brightness / numpy.sum(brightness)
 
 
 def readImage(path, convertToFloat=False):
