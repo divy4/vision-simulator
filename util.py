@@ -20,7 +20,12 @@ def __floatImgToInt(image):
 
 
 def getBrightnessMap(image):
-    pass
+    if len(image.shape) < 3: # black & white
+        return image
+    brightness = numpy.zeros(image.shape[:-1])
+    for index in numpy.ndindex(image.shape[:-1]):
+        brightness[index] = numpy.average(image[index])
+    return brightness / numpy.sum(brightness)
 
 
 def readImage(path, convertToFloat=False):
