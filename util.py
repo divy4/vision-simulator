@@ -16,7 +16,7 @@ def __floatImgToInt(image):
     image *= 255
     image = numpy.maximum(0, image)
     image = numpy.minimum(255, image)
-    return image.astype(int)
+    return image.astype(numpy.uint8)
 
 
 def getArraySliceAt(array, start, shape):
